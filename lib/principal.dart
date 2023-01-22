@@ -49,7 +49,7 @@ class _principal extends State<principal> {
 
   refreshListSearch() {
     setState(() {
-      Studentss = dbHelper.getStudentsSpecified("tel", "8005522222");
+      Studentss = dbHelper.getStudentsSpecified("name",controllerName.text);
     });
   }
 
@@ -111,9 +111,9 @@ class _principal extends State<principal> {
     return Form(
       key: formKey,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.only(top: 10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
           verticalDirection: VerticalDirection.down,
           children: [
@@ -126,7 +126,7 @@ class _principal extends State<principal> {
               decoration: InputDecoration(
                 labelText: 'Nombre',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(15),
                 ),
               ),
               validator: (val) => val!.isEmpty ? 'Ingrese un nombre' : null,
@@ -138,7 +138,7 @@ class _principal extends State<principal> {
               decoration: InputDecoration(
                 labelText: 'Apellido Paterno',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(15),
                 ),
               ),
               validator: (val) => val!.isEmpty ? 'Ingrese Apellido Paterno' : null,
@@ -150,7 +150,7 @@ class _principal extends State<principal> {
               decoration: InputDecoration(
                 labelText: 'Apellido Materno',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(15),
                 ),
               ),
               validator: (val) => val!.isEmpty ? 'Ingrese Apellido Materno' : null,
@@ -162,7 +162,7 @@ class _principal extends State<principal> {
               decoration: InputDecoration(
                 labelText: 'Teléfono',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(15),
                 ),
               ),
               validator: (val) => val!.isEmpty ? 'Ingrese Teléfono' : null,
@@ -174,19 +174,19 @@ class _principal extends State<principal> {
               decoration: InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(15),
                 ),
               ),
               validator: (val) => val!.isEmpty ? 'E-mail' : null,
               onSaved: (val) => email = val,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MaterialButton(
                   onPressed: validate,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(15),
                       side: BorderSide(
                         color: Colors.pinkAccent,
                       )),
@@ -194,14 +194,10 @@ class _principal extends State<principal> {
                 ),
                 MaterialButton(
                   onPressed: () {
-                    /*setState(() {
-                      isUpdating = false;
-                    });
-                    clearData();*/
                     pickImageFromGallery();
                   },
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(15),
                       side: BorderSide(
                         color: Colors.pinkAccent,
                       )),
@@ -209,18 +205,41 @@ class _principal extends State<principal> {
                 ),
                 MaterialButton(
                   onPressed: () {
-                    /*setState(() {
-                      isUpdating = false;
-                    });
-                    clearData();*/
                     refreshListSearch();
                   },
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(10),
                       side: BorderSide(
                         color: Colors.pinkAccent,
                       )),
                   child: Icon(Icons.manage_search_outlined),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                MaterialButton(
+                  onPressed: () {
+                    refreshList();
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(
+                        color: Colors.pinkAccent,
+                      )),
+                  child: Icon(Icons.search_off_outlined),
+                ),
+                MaterialButton(
+                  onPressed: () {
+                    clearData();
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(
+                        color: Colors.pinkAccent,
+                      )),
+                  child: Icon(Icons.clear),
                 ),
               ],
             )
@@ -310,15 +329,15 @@ class _principal extends State<principal> {
         title: Text("PAD_U1_AG1_Equipo1"),
         centerTitle: true,
       ),
-      body: (Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        verticalDirection: VerticalDirection.down,
-        children: [
-          form(),
-          list(),
-        ],
-      )),
+      body:
+        ListView(
+            children: [
+              const Padding(padding: EdgeInsets.only(top: 10)),
+              form(),
+              list(),
+            ]
+        )
+
     );
   }
 }
